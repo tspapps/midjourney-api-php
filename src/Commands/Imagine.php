@@ -8,7 +8,7 @@ use eDiasoft\Midjourney\Resources\Midjourney;
 
 class Imagine extends BaseCommand
 {
-    private int $maxRetries = 10;
+    private int $maxRetries = 100;
     private int $intervalSeconds = 10;
     protected array $payload;
 

@@ -8,7 +8,7 @@ use eDiasoft\Midjourney\Commands\Info;
 use eDiasoft\Midjourney\Commands\Upscale;
 use eDiasoft\Midjourney\Config\Config;
 use eDiasoft\Midjourney\Config\DefaultConfig;
-
+use eDiasoft\Midjourney\Commands\Variation;
 class MidjourneyApiClient
 {
     private Config $config;
@@ -30,5 +30,10 @@ class MidjourneyApiClient
     public function upscale($messageId, $customId, $interactionId = null)
     {
         return new Upscale($this->config, $messageId, $customId, $interactionId);
+    }
+
+    public function variate($messageId, $customId, $interactionId = null)
+    {
+        return new Variation($this->config, $messageId, $customId, $interactionId);
     }
 }
