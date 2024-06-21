@@ -57,7 +57,7 @@ class Variation extends BaseCommand
             sleep($this->intervalSeconds);
 
             $response = $this->client->get(Discord::CHANNELS_URL . '/' . $this->config->channelId() . '/messages');
-            $re = '/\*\*(.*)\[' . $this->interactionId . '\](.*)\*\*(.*)(Image #' . $imageNumber . ')(.*)/';
+            //$re = '/\*\*(.*)\[' . $this->interactionId . '\](.*)\*\*(.*)(Image #' . $imageNumber . ')(.*)/';
 
             foreach($response->body() as $message)
             {
