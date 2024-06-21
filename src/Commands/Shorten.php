@@ -6,14 +6,14 @@ use eDiasoft\Midjourney\Exceptions\MidjourneyException;
 use eDiasoft\Midjourney\Resources\Discord;
 use eDiasoft\Midjourney\Resources\Midjourney;
 
-class Describe extends BaseCommand
+class Shorten extends BaseCommand
 {
     private int $maxRetries = 100;
     private int $intervalSeconds = 10;
     protected array $payload;
 
-    private const ID = '1092492867185950852';
-    private const VERSION = '1237876415471554625';
+    private const ID = '1121575372539039774';
+    private const VERSION = '1247736572414001223';
 
     public function payload(): array
     {
@@ -22,11 +22,11 @@ class Describe extends BaseCommand
             'data'              => [
                 'version'           => self::VERSION,
                 'id'                => self::ID,
-                'name'              => 'describe',
+                'name'              => 'shorten',
                 'type'              => 1,
                 'options'           => array([
                     'type'      =>  3,
-                    'name'      => 'link',
+                    'name'      => 'prompt',
                     'value'     => $this->prompt,
                 ]),
                 'application_command'   =>  [
@@ -35,24 +35,16 @@ class Describe extends BaseCommand
                     'version'                       =>  self::VERSION,
                     'default_member_permissions'    =>  null,
                     'type'                          =>  1,
-                    'name'                          =>  'describe',
-                    'description'                   =>  'Create describe with Midjourney',
+                    'name'                          =>  'shorten',
+                    'description'                   =>  'Analyzes and shortens a prompt.',
                     'dm_permission'                 =>  true,
                     'integration_types'             =>  [0, 1],
                     'nsfw'                          =>  false,
                     'attachments'                   => [],
                     'contexts'                      => [0, 1, 2],
                     'global_popularity_rank'        => 1,
-                    'description_localized'         => 'Create describe with Midjourney',
+                    'description_localized'         => 'Analyzes and shortens a prompt.',
                     'name_localized'                => 'describe',
-                    'options'                       =>  array([
-                        'type'                  =>  3,
-                        'name'                  =>  'prompt',
-                        'description'           =>  'The image to describe',
-                        'required'              =>  true,
-                        "description_localized" => "The image to describe",
-                        "name_localized"        => "prompt"
-                    ])
                 ]
             ]
         ));
@@ -60,97 +52,11 @@ class Describe extends BaseCommand
         return parent::payload();
     }
 
-    public function aspectRatio(string $ratio)
-    {
-        $this->arguments[] = "--aspect " . $ratio;
-
-        return $this;
-    }
-
-    public function chaos(int $number)
-    {
-        $this->arguments[] = "--chaos " . $number;
-
-        return $this;
-    }
-
-    public function fast()
-    {
-        $this->arguments[] = "--fast";
-
-        $this->intervalSeconds = 30;
-
-        return $this;
-    }
-
-    public function imageWeight(int $weight)
-    {
-        $this->arguments[] = "--iw " . $weight;
-
-        return $this;
-    }
-
-    public function no(string $exclude)
-    {
-        $this->arguments[] = "--no " . $exclude;
-
-        return $this;
-    }
-
-    public function quality(float $number)
-    {
-        $this->arguments[] = "--quality " . $number;
-
-        return $this;
-    }
-
     public function relax()
     {
         $this->arguments[] = "--relax";
 
         $this->intervalSeconds = 60;
-
-        return $this;
-    }
-
-    public function repeat(int $times)
-    {
-        $this->arguments[] = "--repeat " . $times;
-
-        return $this;
-    }
-
-    public function seed(int $number)
-    {
-        $this->arguments[] = "--seed " . $number;
-
-        return $this;
-    }
-
-    public function stop(int $number)
-    {
-        $this->arguments[] = "--stop " . $number;
-
-        return $this;
-    }
-
-    public function style(string $style)
-    {
-        $this->arguments[] = "--style " . $style;
-
-        return $this;
-    }
-
-    public function stylize(int $number)
-    {
-        $this->arguments[] = "--stylize " . $number;
-
-        return $this;
-    }
-
-    public function tile()
-    {
-        $this->arguments[] = "--tile";
 
         return $this;
     }
@@ -164,12 +70,6 @@ class Describe extends BaseCommand
         return $this;
     }
 
-    public function weird(int $number)
-    {
-        $this->arguments[] = "--weird " . $number;
-
-        return $this;
-    }
 
     public function setMaxRetries(int $maxRetries)
     {
@@ -186,10 +86,6 @@ class Describe extends BaseCommand
         return $this->retrieveGeneratedImage();
     }
 
-    public function prompt()
-    {
-        return $this->prompt. ' ' . implode(' ', $this->arguments);
-    }
 
     private function retrieveGeneratedImage($tries = 0)
     {

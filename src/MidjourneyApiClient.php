@@ -11,6 +11,8 @@ use eDiasoft\Midjourney\Config\DefaultConfig;
 use eDiasoft\Midjourney\Commands\Variation;
 use eDiasoft\Midjourney\Commands\Reroll;
 use eDiasoft\Midjourney\Commands\Describe;
+use eDiasoft\Midjourney\Commands\Shorten;
+
 class MidjourneyApiClient
 {
     private Config $config;
@@ -47,5 +49,10 @@ class MidjourneyApiClient
     public function describe(string $imageUrl)
     {
         return new Describe($this->config, $imageUrl);
+    }
+
+    public function shorten(string $prompt)
+    {
+        return new Shorten($this->config, $prompt);
     }
 }
