@@ -9,4 +9,5 @@ class Discord
 
     public const WEBHOOK_URL = self::BASE_URL . "/webhooks";
     public const INTERACTIONS_URL = self::BASE_URL . "/interactions";
+
 }

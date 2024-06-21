@@ -9,6 +9,8 @@ use eDiasoft\Midjourney\Commands\Upscale;
 use eDiasoft\Midjourney\Config\Config;
 use eDiasoft\Midjourney\Config\DefaultConfig;
 use eDiasoft\Midjourney\Commands\Variation;
+use eDiasoft\Midjourney\Commands\Reroll;
+use eDiasoft\Midjourney\Commands\Describe;
 class MidjourneyApiClient
 {
     private Config $config;
@@ -27,6 +29,11 @@ class MidjourneyApiClient
         return new Info($this->config);
     }
 
+    public function reroll($messageId, $customId, $interactionId = null)
+    {
+        return new Reroll($this->config, $messageId, $customId, $interactionId);
+    }
+
     public function upscale($messageId, $customId, $interactionId = null)
     {
         return new Upscale($this->config, $messageId, $customId, $interactionId);
@@ -35,5 +42,10 @@ class MidjourneyApiClient
     public function variate($messageId, $customId, $interactionId = null)
     {
         return new Variation($this->config, $messageId, $customId, $interactionId);
+    }
+
+    public function describe(string $imageUrl)
+    {
+        return new Describe($this->config, $imageUrl);
     }
 }
