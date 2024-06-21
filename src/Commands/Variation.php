@@ -64,8 +64,8 @@ class Variation extends BaseCommand
                 if(
                     $message['type'] == 19 &&
                     count($message['attachments']) &&
-                    !str_contains($message['attachments'][0]['filename'], 'grid') &&
-                    count(preg_grep($re, [$message['content']]))
+                    !str_contains($message['attachments'][0]['filename'], 'grid') 
+					// && count(preg_grep($re, [$message['content']]))
                 )
                 {
                     return $message;
